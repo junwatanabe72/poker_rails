@@ -2,12 +2,18 @@
   <h1>
     <a href="/"><%= title %></a>
   </h1>
+
   <nav class="pc-nav">
     <ul>
-      <li><a href="#"></a></li>
-      <li><a href="#">SERVICE</a></li>
-      <li><a href="#">COMPANY</a></li>
-      <li><a href="#">CONTACT</a></li>
+      <% if logged_in? %>
+      <li><%= link_to 'ゲーム', signup_path %></li>
+      <li><%= link_to 'ユーザー', signup_path %></li>
+      <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
+      <% else %>
+      <li><%= link_to 'サインアップ', signup_path %></li>
+      <li><%= link_to 'ログイン', login_path %></li>
+      <% end %>
     </ul>
   </nav>
+
 </header>
