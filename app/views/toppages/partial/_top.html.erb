@@ -1,0 +1,14 @@
+<div class="l-center">
+  <h1>ゲームスタート！</h1>
+  <% if !logged_in? %>
+  <%= render 'toppages/partial/login/game' %>
+  <% else %>
+  <h1>シンプルなポーカーゲームです。</h1>
+  <p>ユーザー登録をして、プレーしてみよう！</p>
+  <div class="l-flex">
+    <%= link_to '登録する！', signup_path,class: 'button button-primary' %>
+    <div class="LR-micro-padding"></div>
+    <%= link_to 'ログイン！', login_path,class: 'button button-secondary' %>
+  </div>
+</div>
+<% end %>
