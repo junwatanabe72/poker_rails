@@ -1,6 +1,7 @@
 class ToppagesController < ApplicationController
-  helper GamesHelper
+  include GamesHelper
 
   def index
+    @cards = create_initial_cards
   end
 end
