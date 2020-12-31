@@ -1,5 +1,17 @@
 <div class="l-flex">
-  <%= link_to '手札を交換する！', signup_path,class: 'button button-primary' %>
-  <div class="LR-micro-padding"></div>
-  <%= link_to '勝負する！', login_path,class: 'button button-secondary' %>
+  <%= form_with(url: results_path , local: true) do |f| %>
+  <div class="l-flex">
+    <% @cards.each_with_index do |card, num| %>
+    <% card_number = exchange_number_to_path(card) %>
+    <div class="image-box">
+      <%= image_tag card_number, {id: "card-#{num + 1}",size: "100x150" }%>
+      <div class="hold-text display-none" id=<%="card-#{num + 1}-text-hold"%>>Hold</div>
+      <%= f.check_box "card#{num+1}".to_sym,{class: "display-none",id:"card-#{num + 1}-checkbox"},"#{card}","1#{card}"%>
+    </div>
+    <% end %>
+  </div>
+  <div class="l-text-center">
+    <%= f.submit '勝負する！', class: 'button button-secondary' %>
+  </div>
+  <% end %>
 </div>

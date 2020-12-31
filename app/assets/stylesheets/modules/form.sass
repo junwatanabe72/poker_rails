@@ -1,0 +1,38 @@
+$pc: 1024px; // PC
+$tab: 680px; // タブレット
+$sp: 480px;  // スマホ
+
+@mixin pc 
+  @media (max-width: ($pc)) 
+    @content
+
+@mixin sp
+  @media (max-width: ($sp)) 
+    @content
+
+.image-box 
+  /* これを追加します。 */
+  position: relative;
+  /* これを追加します。 */
+
+.display-none
+  display: none;
+
+.hold-text
+  /* チェックボックスの位置は絶対位置にします。 */
+  position: absolute;
+  color: white;
+  font-size: 30px;
+  /* チェックボックスは、親要素の右上から12pxの位置に配置します。 */
+  top: 55px
+  right: 20px
+  @include sp()
+    position: absolute;
+    top: 40px
+    right: 10px
+    font-size: 15px
+		
+
+.checked 
+  filter: brightness(50%);
+  -webkit-filter: brightness(50%);

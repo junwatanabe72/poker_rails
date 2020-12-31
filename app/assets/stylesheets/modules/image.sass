@@ -1,0 +1,18 @@
+$pc: 1024px; // PC
+$tab: 680px; // タブレット
+$sp: 480px;  // スマホ
+
+@mixin pc 
+  @media (max-width: ($pc)) 
+    @content
+
+@mixin sp
+  @media (max-width: ($sp)) 
+    @content
+
+
+.image-size
+	@include sp()
+		width: 50px
+		height: 100px
+		
