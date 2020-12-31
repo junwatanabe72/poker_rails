@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
+  include ResultsHelper
+  include GamesHelper
 
   private
 

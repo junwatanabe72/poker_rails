@@ -1,7 +1,4 @@
 class ResultsController < ApplicationController
-  include ResultsHelper
-  include GamesHelper
-
   def index
   end
 
@@ -10,30 +7,37 @@ class ResultsController < ApplicationController
   end
 
   def create
-    # カードを交換する
 
-    # 手を判定する
+    # カードの値をobjectからarrayに成生する
+    cards = serialize_cards(result_params)
+
+    # チェンジを選んだカード交換する
+    cards = change_cards(cards)
+
+    # プレイヤーの手を判定する
+    self_result = eval_hand(cards)
 
     # 相手の手を作る
-    @cards = create_initial_cards
+    @cards = create_initial_cards(cards)
+
+    # 手を判定する
+    @other_result = eval_hand(@cards)
+
     # 勝敗を決める
+    final_result = dual(self_result, @other_result)
 
-    attr = {
-      victory: 1,
-      card1: params[:card1],
-      card2: params[:card2],
-      card3: params[:card3],
-      card4: params[:card4],
-      card5: params[:card5],
-    }
-    @result = Result.create(attr)
+    # dbに保存するために、arrayからobjectへカードを戻す
+    cards = form_cards(cards)
+    # viewに渡すための手(interger)
 
-    if @result.save
-      # flash[:success] = 'ユーザを登録しました。'
-      # redirect_to @result
-    else
-      # flash.now[:danger] = 'ユーザの登録に失敗しました。'
-      # render :new
-    end
+    cards[:victory] = final_result
+
+    @result = Result.create(cards)
+  end
+
+  private
+
+  def result_params
+    params.require(:result).permit(:card1, :card2, :card3, :card4, :card5)
   end
 end
