@@ -1,0 +1,6 @@
+<div class="l-flex">
+  <% @results.each_with_index do |card, num| %>
+  <% card = exchange_number_to_path(card) %>
+  <%= image_tag card, class: "card-#{num + 1}", size: "100x150" %>
+  <% end %>
+</div>
