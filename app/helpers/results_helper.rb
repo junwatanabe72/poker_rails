@@ -29,8 +29,6 @@ module ResultsHelper
     return false
   end
 
-  # num = [6,9,10,11,13]
-  # num.count(6)
   def is_straight?(numbers)
     num = numbers.sort
     if num[1] == num[0] + 1 &&
@@ -72,8 +70,6 @@ module ResultsHelper
   end
 
   def eval_hand(cards)
-    ranks = { high: 0, one: 1, two: 2, three: 3, straight: 4, flush: 5, full: 6, four: 7, sflush: 8, royal: 9 }
-
     suits = create_suits(cards)
     numbers = create_numbers(cards)
     flush = is_flush?(suits)
@@ -90,5 +86,15 @@ module ResultsHelper
     end
     pairs = is_pairs?(numbers)
     return pairs
+  end
+
+  def dual(own, other)
+    if own == other
+      return 10
+    end
+    if own < other
+      return 0
+    end
+    return own
   end
 end

@@ -1,7 +1,9 @@
-<div>あなたの
-  <%= @result.victory==1 ? "勝ち": "負け" %>
+<div>
+  <%= @result.victory == 0 ? "負け" : @result.victory > 9 ? "引き分け" : "勝ち" %>
   です。
 </div>
+<div id="game-result-text"><%= @result.victory %></div>
+
 <% cards = get_cards_number(@result) %>
 <div>あなたのカード</div>
 <div class="l-flex">
@@ -17,3 +19,5 @@
   <%= image_tag card, size: "100x150" %>
   <% end %>
 </div>
+
+<%= javascript_pack_tag 'result/index' %>

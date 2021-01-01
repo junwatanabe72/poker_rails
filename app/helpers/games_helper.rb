@@ -11,14 +11,17 @@ module GamesHelper
   end
 
   def create_initial_cards(initial_cards = [], card = 5)
+    return_cards = []
+    checked_cards = Marshal.load(Marshal.dump(initial_cards))
     card.times {
       created_card = create_card
-      while is_same_card?(initial_cards, created_card)
+      while is_same_card?(checked_cards, created_card)
         created_card = create_card
       end
-      initial_cards << created_card
+      checked_cards << created_card
+      return_cards << created_card
     }
-    return initial_cards
+    return return_cards
   end
 
   def delete_cards(cards, delete_numbers)
@@ -37,6 +40,36 @@ module GamesHelper
   def form_card_number_to_image_path(cards)
     formed_cards = []
     formed_cards = cards.map { |card| exchange_number_to_path(card) }
+    return formed_cards
+  end
+
+  def serialize_cards(result_params)
+    return result_params.values.map(&:to_i)
+  end
+
+  def change_cards(cards)
+    base_cards = cards.map { |card|
+      next card - 1000 if card > 1000
+      return card
+    }
+    return_cards = cards.map { |card|
+      if card > 1000
+        created_card = create_card()
+        while is_same_card?(base_cards, created_card)
+          created_card = create_card
+        end
+        next created_card
+      end
+      card
+    }
+    return return_cards
+  end
+
+  def form_cards(cards)
+    formed_cards = {}
+    cards.each_with_index { |card, num|
+      formed_cards["card#{num + 1}".to_sym] = card
+    }
     return formed_cards
   end
 end
