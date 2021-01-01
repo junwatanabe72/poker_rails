@@ -1,9 +1,11 @@
-const cardElements = [];
 for (let i = 0; i <= 4; i++) {
-  const element = document.querySelector(`.card-${i + 1}`);
+  const element = document.getElementById(`card-${i + 1}`);
   element.onclick = () => {
-    console.log(element);
-    element.style.backgroundColor = "red";
+    const checkBox = document.getElementById(`card-${i + 1}-checkbox`);
+    const text = document.getElementById(`card-${i + 1}-text-hold`);
+    const check = checkBox.checked
+    checkBox.checked = !check
+    element.classList.toggle('checked')
+    text.classList.toggle('display-none')
   };
-  // console.log(document.querySelector(`.card-${i+1}`))
 }
