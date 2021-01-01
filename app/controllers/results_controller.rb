@@ -1,19 +1,14 @@
 class ResultsController < ApplicationController
-  def index
-  end
-
-  def show
-    @result = Result.find(params[:id])
-  end
+  before_action :require_user_logged_in, only: [:create]
 
   def create
-
+    # byebug
     # カードの値をobjectからarrayに成生する
     cards = serialize_cards(result_params)
 
     # チェンジを選んだカード交換する
     cards = change_cards(cards)
-
+    # byebug
     # プレイヤーの手を判定する
     self_result = eval_hand(cards)
 

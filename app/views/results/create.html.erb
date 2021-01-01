@@ -1,23 +1,13 @@
-<div>
-  <%= @result.victory == 0 ? "負け" : @result.victory > 9 ? "引き分け" : "勝ち" %>
-  です。
+<div class="l-center">
+  <%= render 'results/partial/result',{victory: @result.victory} %>
+  <% cards = get_cards_number(@result) %>
+  <%= render 'results/partial/player',{cards: cards,victory: @result.victory} %>
+  <%= render 'results/partial/other',{cards: @cards,victory: @other_result} %>
+  <div class="TB-micro-padding"></div>
+  <div class="l-flex">
+    <%= link_to 'もう一度！', root_path,class: 'button button-primary' %>
+    <div class="LR-micro-padding"></div>
+    <%= link_to 'もうやめる！', users_path,class: 'button button-secondary' %>
+  </div>
 </div>
-<div id="game-result-text"><%= @result.victory %></div>
-
-<% cards = get_cards_number(@result) %>
-<div>あなたのカード</div>
-<div class="l-flex">
-  <% cards.each do |card| %>
-  <% card = exchange_number_to_path(card) %>
-  <%= image_tag card, size: "100x150" %>
-  <% end %>
-</div>
-<div>相手のカード</div>
-<div class="l-flex">
-  <% @cards.each do |card| %>
-  <% card = exchange_number_to_path(card) %>
-  <%= image_tag card, size: "100x150" %>
-  <% end %>
-</div>
-
 <%= javascript_pack_tag 'result/index' %>

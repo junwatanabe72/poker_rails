@@ -1,14 +1,32 @@
 <div class="l-center">
+  <% if logged_in? %>
   <h1>ゲームスタート！</h1>
-  <% if !logged_in? %>
+  <% texts = ["コンピューターとの対決です。役の強さで勝負します。",
+  "カードをクリックすれば、カードをホールドできます。",
+  "カード交換は一度のみです。",
+  "「勝負する!」ボタンを押下して勝敗を決してください。",
+  "役が同じ場合、コンピューターの勝利となります。"]%>
+  <ol>
+    <% texts.each{|text| %>
+    <li class="font-size-list"><%=text %></li>
+    <% } %>
+  </ol>
+  <div class="TB-micro-padding"></div>
   <%= render 'toppages/partial/login/game' %>
   <% else %>
-  <h1>シンプルなポーカーゲームです。</h1>
-  <p>ユーザー登録をして、プレーしてみよう！</p>
+  <h2>シンプルなポーカーゲームです。</h2>
+  <% texts = ["プレーするには、ユーザー登録が必要です。",
+  "登録がお済みの方は、ログインしてプレーをお楽しみください。"]%>
+  <ol>
+    <% texts.each{|text| %>
+    <li class="font-size-list"><%=text %></li>
+    <% } %>
+  </ol>
+  <div class="TB-micro-padding"></div>
   <div class="l-flex">
     <%= link_to '登録する！', signup_path,class: 'button button-primary' %>
     <div class="LR-micro-padding"></div>
     <%= link_to 'ログイン！', login_path,class: 'button button-secondary' %>
   </div>
+  <% end %>
 </div>
-<% end %>

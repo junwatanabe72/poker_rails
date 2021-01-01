@@ -6,12 +6,12 @@
   <nav class="pc-nav">
     <ul>
       <% if logged_in? %>
-      <li><%= link_to 'ゲーム', signup_path %></li>
-      <li><%= link_to 'ユーザー', signup_path %></li>
-      <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
+      <li class="font-size-sp"><%= link_to 'ゲーム', signup_path %></li>
+      <li class="font-size-sp"><%= link_to 'ユーザー', signup_path %></li>
+      <li class="font-size-sp"><%= link_to 'ログアウト', logout_path, method: :delete %></li>
       <% else %>
-      <li><%= link_to 'サインアップ', signup_path %></li>
-      <li><%= link_to 'ログイン', login_path %></li>
+      <li class="font-size-sp"><%= link_to 'サインアップ', signup_path %></li>
+      <li class="font-size-sp"><%= link_to 'ログイン', login_path %></li>
       <% end %>
     </ul>
   </nav>
