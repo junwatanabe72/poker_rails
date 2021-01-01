@@ -1,0 +1,19 @@
+<div>あなたの
+  <%= @result.victory==1 ? "勝ち": "負け" %>
+  です。
+</div>
+<% cards = get_cards_number(@result) %>
+<div>あなたのカード</div>
+<div class="l-flex">
+  <% cards.each do |card| %>
+  <% card = exchange_number_to_path(card) %>
+  <%= image_tag card, size: "100x150" %>
+  <% end %>
+</div>
+<div>相手のカード</div>
+<div class="l-flex">
+  <% @cards.each do |card| %>
+  <% card = exchange_number_to_path(card) %>
+  <%= image_tag card, size: "100x150" %>
+  <% end %>
+</div>
