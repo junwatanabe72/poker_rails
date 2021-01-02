@@ -1,0 +1,12 @@
+<% if users.any? %>
+<ul class="l-center">
+  <% users.each_with_index do |user,num| %>
+  <%= link_to user_path(user) do %>
+  <li>
+    <%= render "users/partial/show/user",{user:user,average: nil,title:"player#{num+1}"} %>
+  </li>
+  <% end %>
+  <% end %>
+</ul>
+<%= paginate users %>
+<% end %>

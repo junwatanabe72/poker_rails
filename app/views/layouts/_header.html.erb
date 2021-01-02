@@ -6,12 +6,13 @@
   <nav class="pc-nav">
     <ul>
       <% if logged_in? %>
-      <li class="font-size-sp"><%= link_to 'ゲーム', signup_path %></li>
-      <li class="font-size-sp"><%= link_to 'ユーザー', signup_path %></li>
-      <li class="font-size-sp"><%= link_to 'ログアウト', logout_path, method: :delete %></li>
+      <li class="font-size-sp"><%= link_to "poker", root_path %></li>
+      <li class="font-size-sp"><%= link_to "users", users_path %></li>
+      <li class="font-size-sp"><%= link_to "#{current_user.name}", current_user %></li>
+      <li class="font-size-sp"><%= link_to 'logout', logout_path, method: :delete %></li>
       <% else %>
-      <li class="font-size-sp"><%= link_to 'サインアップ', signup_path %></li>
-      <li class="font-size-sp"><%= link_to 'ログイン', login_path %></li>
+      <li class="font-size-sp"><%= link_to 'signup', signup_path %></li>
+      <li class="font-size-sp"><%= link_to "login", login_path %></li>
       <% end %>
     </ul>
   </nav>

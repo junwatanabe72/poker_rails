@@ -5,9 +5,9 @@
   <%= render 'results/partial/other',{cards: @cards,victory: @other_result} %>
   <div class="TB-micro-padding"></div>
   <div class="l-flex">
-    <%= link_to 'もう一度！', root_path,class: 'button button-primary' %>
+    <%= link_to 'もう一度！', root_path,class: 'button button-secondary' %>
     <div class="LR-micro-padding"></div>
-    <%= link_to 'もうやめる！', users_path,class: 'button button-secondary' %>
+    <%= link_to 'もうやめる！',current_user,class: 'button button-primary' %>
   </div>
 </div>
 <%= javascript_pack_tag 'result/index' %>

@@ -1,31 +1,39 @@
-<div class="text-center">
+<div class="l-center">
   <h1>Sign up</h1>
-</div>
-
-<div class="row">
-  <div class="col-sm-6 offset-sm-3">
-
-    <%= form_with(model: @user, local: true) do |f| %>
-    <%# <%= render 'layouts/error_messages', model: f.object %> %>
-    <div class="form-group">
-      <%= f.label :name, 'Name' %>
-      <%= f.text_field :name, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :email, 'Email' %>
-      <%= f.email_field :email, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :password, 'Password' %>
-      <%= f.password_field :password, class: 'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :password_confirmation, 'Confirmation' %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-    </div>
-
-    <%= f.submit 'Sign up', class: 'btn btn-primary btn-block' %>
-    <% end %>
+  <%= form_with(model: @user, local: true) do |f| %>
+  <% if @user.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
   </div>
+  <% end %>
+  <div class="form-group">
+    <div class="user-edit-p1">名前</div>
+    <%= f.text_field :name,placeholder: "50字以下", class: 'form' %>
+  </div>
+  <div class="form-group">
+    <div class="user-edit-p1">メールアドレス</div>
+    <%= f.email_field :email, class: 'form' %>
+  </div>
+  <div class="form-group">
+    <%# <div class="user-edit-p1">アイコン</div> %>
+    <%= f.hidden_field :icon, value: 1,class: 'form' %>
+  </div>
+  <div class="form-group">
+    <div class="user-edit-p1">パスワード</div>
+    <%= f.password_field :password, class: 'form' %>
+  </div>
+
+  <div class="form-group">
+    <div class="user-edit-p1">パスワードをもう一度</div>
+    <%= f.password_field :password_confirmation, class: 'form' %>
+  </div>
+  <div class="TB-middle-padding"></div>
+  <div class="l-text-center">
+    <%= f.submit '登録する！', class: 'button button-primary' %>
+  </div>
+  <% end %>
 </div>
