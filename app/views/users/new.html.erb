@@ -19,14 +19,22 @@
     <%= f.email_field :email, class: 'form' %>
   </div>
   <div class="form-group">
-    <%# <div class="user-edit-p1">アイコン</div> %>
-    <%= f.hidden_field :icon, value: 1,class: 'form' %>
+    <div class="user-edit-p1">あなたのアイコン</div>
+    <div class="l-text-between">
+      <% (1..5).each do |number| %>
+      <div>
+        <%= image_tag "user/#{number}.png", {id: "card-#{number}",size: "50x75" }%>
+        <label class="l-block">
+          <%= f.radio_button :icon,number,{class: "",id:"card-#{number}-radio"} %>
+        </label>
+      </div>
+      <% end %>
+    </div>
   </div>
   <div class="form-group">
     <div class="user-edit-p1">パスワード</div>
     <%= f.password_field :password, class: 'form' %>
   </div>
-
   <div class="form-group">
     <div class="user-edit-p1">パスワードをもう一度</div>
     <%= f.password_field :password_confirmation, class: 'form' %>
