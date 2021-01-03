@@ -9,14 +9,14 @@ RSpec.describe "GamesHelper", type: :helper do
       card_numbers = [*1..13]
       expected_numbers = card_codes.map { |num| card_numbers.map { |n| num + n } }.flatten
       card = create_card()
-      (1..100).each {
+      100.times {
         expect(expected_numbers).to include card
       }
     end
   end
   context "create_initial_cards" do
     it "is no5" do
-      (1..100).each {
+      100.times {
         cards = create_initial_cards()
         expect(cards.uniq.length).to eq(5)
       }
@@ -64,6 +64,14 @@ RSpec.describe "GamesHelper", type: :helper do
       cards = serialize_cards(arg)
       changed_cards = change_cards(cards)
       expect(changed_cards).to include(306, 107, 204)
+    end
+    it "is uniq" do
+      cards = [1310, 1208, 1306, 1107, 1204]
+      1000.times {
+        length = 5
+        changed_cards = change_cards(cards)
+        expect(changed_cards.uniq.length).to eq(length)
+      }
     end
   end
   context "form_cards" do

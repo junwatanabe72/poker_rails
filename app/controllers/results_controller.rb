@@ -7,6 +7,7 @@ class ResultsController < ApplicationController
 
   def create
     # カードの値をobjectからarrayに成生する
+
     cards = serialize_cards(result_params)
     # チェンジを選んだカード交換する
     cards = change_cards(cards)

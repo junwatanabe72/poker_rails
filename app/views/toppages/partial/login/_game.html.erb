@@ -1,7 +1,7 @@
 <div class="l-flex">
-  <%= form_with(model: @result ,url: results_path , local: true) do |f| %>
+  <%= form_with(model: result ,url: results_path , local: true) do |f| %>
   <div class="l-flex">
-    <% @cards.each_with_index do |card, num| %>
+    <% cards.each_with_index do |card, num| %>
     <% card_number = exchange_number_to_path(card) %>
     <div class="image-box">
       <%= image_tag card_number, {id: "card-#{num + 1}",class: "image-size",size: "100x150" }%>
