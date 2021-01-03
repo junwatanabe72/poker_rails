@@ -9,6 +9,7 @@ gem "rails", "~> 6.1.0"
 gem "mysql2", "~> 0.5"
 # Use Puma as the app server
 gem "puma", "~> 5.0"
+gem "unicorn"
 # Use SCSS for stylesheets
 gem "sass-rails", ">= 6"
 gem "rufo"

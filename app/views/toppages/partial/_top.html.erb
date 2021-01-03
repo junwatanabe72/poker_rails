@@ -12,7 +12,7 @@
     <% } %>
   </ol>
   <div class="TB-micro-padding"></div>
-  <%= render 'toppages/partial/login/game' %>
+  <%= render 'toppages/partial/login/game',{cards: @cards,result:@result} %>
   <% else %>
   <h2>シンプルなポーカーゲームです。</h2>
   <% texts = ["プレーするには、ユーザー登録が必要です。",

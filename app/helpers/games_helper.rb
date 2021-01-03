@@ -12,7 +12,7 @@ module GamesHelper
 
   def create_initial_cards(initial_cards = [], card = 5)
     return_cards = []
-    checked_cards = Marshal.load(Marshal.dump(initial_cards))
+    checked_cards = initial_cards.map { |card| card }
     card.times {
       created_card = create_card
       while is_same_card?(checked_cards, created_card)
@@ -48,6 +48,7 @@ module GamesHelper
         while is_same_card?(base_cards, created_card)
           created_card = create_card
         end
+        base_cards << created_card
         next created_card
       end
       card
