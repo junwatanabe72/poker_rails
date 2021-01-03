@@ -51,6 +51,14 @@
 
 <img width="1440" alt="スクリーンショット 2021-01-03 13 47 31" src="https://user-images.githubusercontent.com/50585862/103471950-6e0cd780-4dca-11eb-8870-48ede128a81b.png">
 <img width="1440" alt="スクリーンショット 2021-01-03 13 47 53" src="https://user-images.githubusercontent.com/50585862/103471951-6f3e0480-4dca-11eb-8eca-ead55e881726.png">
+
+## ER 図
+
+<img width="1440" alt="スクリーンショット 2021-01-03 16 37 04" src="https://user-images.githubusercontent.com/50585862/103473965-fc408800-4de1-11eb-9dc3-4629090b5afd.png">
+
+※1 results.victory はワンペア等の役を数値型で保管  
+※2 results.card は５枚のカードを数値型で保管
+
 ## ページ構成
 
 | NO  | PATH       | EXPLANATION        | REMARKS              |
