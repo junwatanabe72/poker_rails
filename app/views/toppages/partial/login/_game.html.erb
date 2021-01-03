@@ -1,3 +1,17 @@
-<%= render "toppages/partial/login/card" %>
-<div class="TB-micro-padding"></div>
-<%= render "toppages/partial/login/button" %>
+<div class="l-flex">
+  <%= form_with(model: @result ,url: results_path , local: true) do |f| %>
+  <div class="l-flex">
+    <% @cards.each_with_index do |card, num| %>
+    <% card_number = exchange_number_to_path(card) %>
+    <div class="image-box">
+      <%= image_tag card_number, {id: "card-#{num + 1}",class: "image-size",size: "100x150" }%>
+      <div class="hold-text display-none" id=<%="card-#{num + 1}-text-hold"%>>Hold</div>
+      <%= f.check_box "card#{num+1}".to_sym,{class: "display-none",id:"card-#{num + 1}-checkbox"},"#{card}","1#{card}"%>
+    </div>
+    <% end %>
+  </div>
+  <div class="l-text-center">
+    <%= f.submit '勝負する！', class: 'button button-secondary' %>
+  </div>
+  <% end %>
+</div>

@@ -1,8 +1,0 @@
-<%= @result.victory==1 ? "勝ち": "負け" %>
-<% cards = get_cards_number(@result) %>
-<div class="l-flex">
-  <% cards.each do |card|%>
-  <% card = exchange_number_to_path(card) %>
-  <%= image_tag card, class: "card-#{num + 1}", size: "100x150" %>
-  <% end %>
-</div>

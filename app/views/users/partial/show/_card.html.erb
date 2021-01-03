@@ -1,0 +1,8 @@
+<h3><%= cards.victory %></h3>
+<div class="l-flex">
+  <% (1..5).each do |num| %>
+  <% card = cards["card#{num}".to_sym] %>
+  <% card = exchange_number_to_path(card) %>
+  <%= image_tag card, { class: "image-size", size: "100x150" } %>
+  <% end %>
+</div>

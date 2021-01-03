@@ -24,10 +24,6 @@ module GamesHelper
     return return_cards
   end
 
-  def delete_cards(cards, delete_numbers)
-    return cards.select { |card| delete_numbers.include?(card) }
-  end
-
   def exchange_number_to_path(card_number)
     mime = ".png"
     card_images = { diamond: 100, heart: 200, spade: 300, club: 400 }
@@ -37,12 +33,6 @@ module GamesHelper
     return image_path = "#{image_codes[0]}/#{num}#{mime}"
   end
 
-  def form_card_number_to_image_path(cards)
-    formed_cards = []
-    formed_cards = cards.map { |card| exchange_number_to_path(card) }
-    return formed_cards
-  end
-
   def serialize_cards(result_params)
     return result_params.values.map(&:to_i)
   end
@@ -50,7 +40,7 @@ module GamesHelper
   def change_cards(cards)
     base_cards = cards.map { |card|
       next card - 1000 if card > 1000
-      return card
+      card
     }
     return_cards = cards.map { |card|
       if card > 1000

@@ -18,15 +18,13 @@ const createResult = (number) => {
 }
 
 const showResult = () => {
-  const otherElement = document.getElementById(`game-other-result-text`);
-  const resultOtherNumber = otherElement.textContent
-  const otherText = createResult(resultOtherNumber)
-  otherElement.innerHTML = otherText
+  const elements = document.getElementsByTagName(`h3`);
+  for (let i = 0; i < elements.length; i++) {
+    const resultNumber = elements[i].textContent
+    const text = createResult(resultNumber)
+    elements[i].innerHTML = text
+  }
 
-  const element = document.getElementById(`game-result-text`);
-  const resultNumber = element.textContent
-  const text = createResult(resultNumber) ? createResult(resultNumber) : otherText
-  element.innerHTML = text
+
 }
-
 showResult()

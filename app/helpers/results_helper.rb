@@ -60,7 +60,7 @@ module ResultsHelper
     if count_box.include?(3)
       return 3
     end
-    if count_box.include?(2) && count_box.length == 3
+    if count_box.include?(2) && count_box.count(2) == 4
       return 2
     end
     if count_box.include?(2)

@@ -1,8 +1,24 @@
+
+$pc: 1024px; // PC
+$tab: 680px; // タブレット
+$sp: 480px;  // スマホ
+
+@mixin pc 
+  @media (max-width: ($pc)) 
+    @content
+
+@mixin sp
+  @media (max-width: ($sp)) 
+    @content
+
+
 .l-flex
     display: flex
 .l-align-center
     align-items: center;
-
+    
+.l-align-start
+    align-items: start;
 .l-text-center
     display: flex;
     justify-content: center;
@@ -13,7 +29,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 300px
+
+
 
 .l-flex-wrap
     flex-wrap: wrap
@@ -28,6 +45,21 @@
     top: 0;
     width: 100%;
     background-color: transparent;
+    height: 80px
 
 .l-section
     margin: 32px 0 
+.l-card
+    width: 500px
+    @include sp()
+	    width: 250px
+.l-card-position
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+.l-user-content
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    flex-direction: column;

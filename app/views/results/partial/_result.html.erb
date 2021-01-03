@@ -1,0 +1,13 @@
+<% if 0<victory && victory<10 %>
+<div class="l-text-center">
+  <%= image_tag "result/win.png", {class: "image-size",size: "100x150" } %>
+  <div class="LR-micro-padding"></div>
+  <h2 class="font-size-sp">勝ちです。</h2>
+</div>
+<% else %>
+<div class="l-text-center">
+  <%= image_tag "result/lose.png", { class: "image-size", size: "100x150" } %>
+  <div class="LR-micro-padding"></div>
+  <h2 class="font-size-sp"><%=@result.victory == 0 ? "負け" : "引き分け" %>です。</h2>
+</div>
+<% end %>
