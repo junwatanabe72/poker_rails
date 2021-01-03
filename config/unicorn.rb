@@ -18,7 +18,7 @@ working_directory rails_root
 
 # 接続タイムアウト時間
 timeout 30
-
+listen 3000
 # Unicornのエラーログと通常ログの位置を指定。
 stderr_path File.expand_path("../../log/unicorn_stderr.log", __FILE__)
 stdout_path File.expand_path("../../log/unicorn_stdout.log", __FILE__)

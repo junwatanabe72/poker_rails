@@ -6,7 +6,6 @@
   <nav class="pc-nav">
     <ul>
       <% if logged_in? %>
-      <li class="font-size-sp"><%= link_to "poker", root_path %></li>
       <li class="font-size-sp"><%= link_to "users", users_path %></li>
       <li class="font-size-sp"><%= link_to "#{current_user.name}", current_user %></li>
       <li class="font-size-sp"><%= link_to 'logout', logout_path, method: :delete %></li>
