@@ -1,17 +1,8 @@
+@import 'variables';
 
-$pc: 1024px; // PC
-$tab: 680px; // タブレット
-$sp: 480px;  // スマホ
-
-@mixin pc 
-  @media (max-width: ($pc)) 
-    @content
-
-@mixin sp
-  @media (max-width: ($sp)) 
-    @content
-
-
+.l-block
+    display: block
+    text-align: center
 .l-flex
     display: flex
 .l-align-center
@@ -22,6 +13,11 @@ $sp: 480px;  // スマホ
 .l-text-center
     display: flex;
     justify-content: center;
+    align-items: center;
+
+.l-text-between
+    display: flex;
+    justify-content: space-between;;
     align-items: center;
 
 .l-center

@@ -2,29 +2,22 @@
 // Colors:
 $background-color: #FFFFFF
 // declare your variables for color
-$warning: #ffdd40
+$secondary: #ff8a50
 $primary: #47cf73
-$accent: #0ebeff
-$weak: #b7bbc8
-$hilight-orange: #a88038
-$hilight-beige: #e1ca72
-$hilight-green: #74b087
-$hilight-purple: #9f8198
-$hilight-blue: #7a99ad
-
-// Break Points:
-$screen-sm-min: 576px
-
-// Small tablets (portrait view)
-$screen-md-min: 768px
-
-// Tablets and small desktops
-$screen-lg-min: 992px
-
-// Large tablets and desktops
-$screen-xl-min: 1200px
+$white: #ffffff
 
 
-@mixin sm
-    @media screen
-        max-width: $screen-sm-min
+$pc: 1024px; // PC
+$tab: 680px; // タブレット
+$sp: 480px;  // スマホ
+
+@mixin pc 
+  @media (max-width: ($pc)) 
+    @content
+
+@mixin sp
+  @media (max-width: ($sp)) 
+    @content
+
+@mixin padding ($top: 0vw, $right: 0vw,$bottom: 0vw,$left: 0vw)
+    padding: $top $right $bottom $left;
