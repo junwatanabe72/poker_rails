@@ -1,133 +1,64 @@
-## golfersfarm
+## simplePoker
 
 ---
 
-ゴルファーのプロフィール登録ツールです。  
-このアプリはゴルファーの名刺として使えます。
-レスポンシブル対応なので、スマホ画面でも問題ありません。  
-現在、production 版として、本アプリの next.js 化を行っています。  
-[こちらが完成版です 😀](https://golfersfarm.com/)
+<img width="1440" alt="スクリーンショット 2021-01-03 13 47 16" src="https://user-images.githubusercontent.com/50585862/103471941-559cbd00-4dca-11eb-84da-bb521cf18985.png">
 
-<img width="1433" alt="スクリーンショット 2020-12-03 16 46 28" src="https://user-images.githubusercontent.com/50585862/100980654-eba1b580-3588-11eb-956e-f387b9ff458b.png">
+ポーカーゲームです。  
+コンピューターと役の強さを競います。  
+プレーするために、ユーザー登録、ログインが必要です。  
+※アプリ立ち上げに時間がかかる場合があります 🙇‍♂️
+
+- テストユーザ用のアカウントです。
+  - email: test@test.com
+  - password: test
 
 ## アプリの概要
 
-- 名称: golfersfarm
-- site: https://golfersfarm.netlify.app/
-- 目的: typescript にてアプリケーションを開発した実績を作る。フロントエンドとバックエンドが分離したモダンな開発を経験する。
-- 設計:
-  - フロント側：redux にて状態を管理。バックエンドとの通信には、redux-saga,axios を使用。
-  - バックエンド側: express にて API を作成。jwt を活用し、secure な開発を心がけた。
-  - 全体: docker-compose を使用し、client,server,db コンテナを稼働させ開発を行った。
-- 背景: コロナ禍において、ゴルフは三密を回避するスポーツとして、今、見直されてきています。 また、リモートワークの推進により、余暇時間が増え、そして、都心から地方へ居を移す動きが増加した場合、ゴルフを始めるというニーズは増えていくと予想されます。従来、事前にメンバーを集めることがゴルフの常識でしたが、今後はちょっと空いた時間を利用した一人ゴルフが増えていくのではないかと思料されます。その際に、名刺代わりに使用するツールとして作成しました。
+- 名称: simplePoker
+- site: https://simple-poker-jw.herokuapp.com/
+- 目的: ruby 2.6、rails 6.0 を使用した web アプリを作成する。  
+   　　 view 内で javascript を使用した 動的な動きを実装する。
+- 設計: nginx を web サーバー,unicorn を AP サーバーとした。
+
+## 操作方法
+
+1. トップページの「登録する！」ボタンからユーザー登録ページへ遷移。
+2. 登録ページの必要事項を入力し、「登録する！」を押下。
+3. 登録後、ログインページへ遷移し、先ほど登録したメールアドレスとパスワードを入力。「ログイン！」ボタンを押下。
+4. ログインが成功すれば、user ページに遷移します。header 「poker」を押下するとゲームが開始されます。
+
+5. カードの交換は一度のみです。
+6. 場に残したいカードは、カードをクリックすることで hold されます。
+7. 「勝負する！」ボタンを押すと result ページに遷移し、勝敗が決します。
+8. 「もう一度！」ボタンを押下すれば、再度勝負が始まります。
 
 ## 使用した技術
 
-フロントエンド
-
-- react
-- react-router
-- connected-react-router
-- react-modal
-- react-toastify
-- redux,react-redux
-- redux-saga
-- axios
-- formik
-- yup
-- typescript
-- eslint+prettier
-- styled-components
-- netlify
-- ansible
-
-バックエンド
-
-- express
-- bcrypt
-- passport
-- passport-jwt
-- passport-local
-- sequelize
-- multer
-- sharp
-- mysql2
-- typescript
+- ruby on Rails 6.0
+- ruby 2.6.5
+- javascript
+- sass
+- mysql 8.0
+- nginx
+- Rspec
+- unicorn
 - heroku
-- ansible
+- docker
+- docker-compose
 
-## 設計
+## ページビュー
 
-### 全体構成
+<img width="1440" alt="スクリーンショット 2021-01-03 13 47 31" src="https://user-images.githubusercontent.com/50585862/103471950-6e0cd780-4dca-11eb-8870-48ede128a81b.png">
+<img width="1440" alt="スクリーンショット 2021-01-03 13 47 53" src="https://user-images.githubusercontent.com/50585862/103471951-6f3e0480-4dca-11eb-8eca-ead55e881726.png">
+## ページ構成
 
-![image](https://user-images.githubusercontent.com/50585862/101127024-fd925f80-363f-11eb-89cb-bfc76ee8b008.png)
-
-### 認証
-
-![image](https://user-images.githubusercontent.com/50585862/101127020-f8cdab80-363f-11eb-9d99-c8e36132729b.png)
-
-#### jwtToken にて認証。ブラウザの localStorage にて Token を管理。
-
-1.  クライアントのログインページにて、サーバー側にログインリクエスト。
-2.  リクエストが、認証されれば、server から jwtToken が送られる。
-3.  送られてきた jwtToken をブラウザの localStorage に保存。
-4.  以降、API リクエストごとに認証。
-5.  リダイレクトした場合、localStorage に jwtToken があれば、自動的にログインされる。
-
-### フロントエンド(ページ構成)
-
-| NO  | PATH            | EXPLANATION        | REMARKS |
-| --- | --------------- | ------------------ | ------- |
-| 1   | /               | トップ             |
-| 2   | /users          | ユーザー一覧       |
-| 3   | /users/:id      | ユーザー詳細       |
-| 4   | /users/:id/edit | ユーザーデータ編集 |
-| 5   | /auth/signup    | ユーザー登録       |
-| 6   | /auth/login     | ユーザーログイン   |
-| 7   | /auth/logout    | ログアウト         |
-| 8   | /privacy        | 個人情報の取扱い   |
-| 9   | /tos            | 利用規約           |
-| 10  | /about          | アプリ説明         |
-| 11  | /contact        | 問合せフォーム     |
-
-/users  
-<img width="300" alt="スクリーンショット 2020-12-03 16 50 17" src="https://user-images.githubusercontent.com/50585862/100980871-42a78a80-3589-11eb-96c2-72d53a10f9db.png">  
-/users/:id  
-<img width="300" alt="スクリーンショット 2020-12-03 16 50 33" src="https://user-images.githubusercontent.com/50585862/100980883-476c3e80-3589-11eb-8d91-5c89a134fda9.png">
-
-### API エンドポイント
-
-![image](https://user-images.githubusercontent.com/50585862/101126959-e0f62780-363f-11eb-87fa-631325cfc5a1.png)
-
-/auth
-
-| NO  | METHOD | PATH    | EXPLANATION      | REMARKS          |
-| --- | ------ | ------- | ---------------- | ---------------- |
-| 1   | POST   | /signup | ユーザー新規作成 |
-| 2   | POST   | /login  | ユーザーログイン |
-| 3   | GET    | /login  | ユーザーログイン | 初期リクエスト時 |
-
-/users
-
-| NO  | METHOD | PATH                 | EXPLANATION                                  | REMARKS |
-| --- | ------ | -------------------- | -------------------------------------------- | ------- |
-| 1   | GET    | /                    | ユーザー一覧取得                             |
-| 2   | PATCH  | /:id/edit            | ユーザーデータ更新                           |
-| 3   | GET    | /:id/ball            | ユーザー使用ボールの取得                     |
-| 4   | PATCH  | /:id/ball            | ユーザー使用ボールの更新                     |
-| 5   | GET    | /:id/clubs           | ユーザー使用クラブの取得                     |
-| 6   | POST   | /:id/clubs/replace   | ユーザー使用クラブの作成、更新、削除         |
-| 7   | GET    | /:id/videos          | ユーザー youtube 動画の URL 取得             |
-| 8   | POST   | /:id/videos/replace  | ユーザー youtube 動画 URL の作成、更新、削除 |
-| 9   | GET    | /:id/results         | ユーザー競技結果の取得                       |
-| 10  | POST   | /:id/results/replace | ユーザー競技結果の作成、更新、削除           |
-
-※ユーザー個人データのエンドポイントはありません。ユーザー一覧から取得したデータを元にフロント側で処理します。  
-other
-
-| NO  | METHOD | PATH     | EXPLANATION                    | REMARKS      |
-| --- | ------ | -------- | ------------------------------ | ------------ |
-| 1   | GET    | /makers  | メーカー一覧取得               | 初期データ   |
-| 2   | GET    | /shafts  | ゴルフクラブのシャフト一覧取得 | 　初期データ |
-| 3   | GET    | /types   | ゴルフクラブの番手一覧取得     | 初期データ   |
-| 4   | POST   | /contact | 問合せ内容をメールで送信       |
+| NO  | PATH       | EXPLANATION        | REMARKS              |
+| --- | ---------- | ------------------ | -------------------- |
+| 1   | /          | トップ             | ログイン後ゲーム画面 |
+| 2   | /users     | ユーザー一覧       |
+| 3   | /users/:id | ユーザー詳細       |
+| 4   | /results   | ポーカーの結果表示 |
+| 5   | /signup    | ユーザー登録       |
+| 6   | /login     | ユーザーログイン   |
+| 7   | /logout    | ログアウト         |
