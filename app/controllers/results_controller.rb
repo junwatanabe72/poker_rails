@@ -1,6 +1,4 @@
 class ResultsController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :create]
-
   def index
     redirect_to root_path
   end

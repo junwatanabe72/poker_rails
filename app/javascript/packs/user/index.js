@@ -1,5 +1,5 @@
-const createResult = (number) => {
-  handList = {
+export const createResult = (number) => {
+  const handList = {
     high: "ハイカード",
     one: "ワンペア",
     two: "ツーペア",
@@ -16,15 +16,14 @@ const createResult = (number) => {
   return result
 
 }
-
-const showResult = () => {
-  const elements = document.getElementsByTagName(`h3`);
-  for (let i = 0; i < elements.length; i++) {
-    const resultNumber = elements[i].textContent
+export const user = () => {
+  for (let i = 1; i <= 5; i++) {
+    const element = document.getElementById(`user-victory${i}`);
+    if (!element) {
+      return
+    }
+    const resultNumber = element.textContent
     const text = createResult(resultNumber)
-    elements[i].innerHTML = text
+    element.innerHTML = text
   }
-
-
 }
-showResult()

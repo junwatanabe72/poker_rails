@@ -1,4 +1,5 @@
 class ToppagesController < ApplicationController
+  skip_before_action :require_user_logged_in
   include GamesHelper
 
   def index

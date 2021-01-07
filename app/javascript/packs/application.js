@@ -7,7 +7,23 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+import {
+  game
+} from "./game"
+import {
+  result
+}
+from "./result"
+import {
+  user,
+}
+from "./user"
+
+
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+game()
+result()
+user()
