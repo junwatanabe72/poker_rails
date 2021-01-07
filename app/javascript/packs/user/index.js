@@ -16,14 +16,17 @@ export const createResult = (number) => {
   return result
 
 }
+
 export const user = () => {
-  for (let i = 1; i <= 5; i++) {
-    const element = document.getElementById(`user-victory${i}`);
-    if (!element) {
-      return
+  document.addEventListener("turbolinks:load", function () {
+    for (let i = 1; i <= 6; i++) {
+      const element = document.getElementById(`user-victory${i}`);
+      if (!element) {
+        return
+      }
+      const resultNumber = element.textContent
+      const text = createResult(resultNumber)
+      element.innerHTML = text
     }
-    const resultNumber = element.textContent
-    const text = createResult(resultNumber)
-    element.innerHTML = text
-  }
+  })
 }

@@ -15,7 +15,7 @@ import {
 }
 from "./result"
 import {
-  user,
+  user
 }
 from "./user"
 

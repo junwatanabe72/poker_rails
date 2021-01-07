@@ -2,8 +2,9 @@
   <%= render 'results/partial/result',{victory: @result.victory} %>
   <% cards = get_cards_number(@result) %>
   <%= render 'results/partial/player',{cards: cards,victory: @result.victory} %>
-  <%= render 'results/partial/other',{cards: @cards,victory: @other_result} %>
-  <div class="TB-micro-padding"></div>
+  <%= render 'results/partial/other',{cards: @opponent_cards,victory: @opponent_result} %>
+  <div class="TB-micro-padding">
+  </div>
   <div class="l-flex">
     <%= link_to 'もう一度！', root_path,class: 'button button-secondary' %>
     <div class="LR-micro-padding"></div>

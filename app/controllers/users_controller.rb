@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :require_user_logged_in, only: [:new ,:create]
   
   def index
     @users = User.order(id: :desc).page(params[:page]).per(25)
