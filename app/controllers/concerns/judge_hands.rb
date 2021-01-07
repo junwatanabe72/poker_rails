@@ -1,4 +1,6 @@
-module ResultsHelper
+module JudgeHands
+  extend ActiveSupport::Concern
+
   def get_cards_number(result)
     cards = []
     (1..5).each { |num|
@@ -88,7 +90,7 @@ module ResultsHelper
     return pairs
   end
 
-  def dual(own, other)
+  def get_victory_number(own, other)
     if own == other
       return 10
     end
@@ -96,5 +98,12 @@ module ResultsHelper
       return 0
     end
     return own
+  end
+
+  def play_poker(self_result, opponent_result)
+    self_result_number = eval_hand(self_result)
+    opponent_result_number = eval_hand(opponent_result)
+    result_number = get_victory_number(self_result_number, opponent_result_number)
+    return result_number
   end
 end

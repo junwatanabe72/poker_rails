@@ -1,7 +1,11 @@
 class ApplicationController < ActionController::Base
+  helper_method :current_user
+  before_action :require_user_logged_in
+
   include SessionsHelper
-  include ResultsHelper
-  include GamesHelper
+  include CreateCards
+  include ChangeCards
+  include JudgeHands
 
   private
 

@@ -1,5 +1,5 @@
 const createResult = (number) => {
-  handList = {
+  const handList = {
     high: "ハイカード",
     one: "ワンペア",
     two: "ツーペア",
@@ -16,17 +16,19 @@ const createResult = (number) => {
   return result
 
 }
+export const result = () => {
+  document.addEventListener("turbolinks:load", function () {
+    const otherElement = document.getElementById(`game-other-result-text`);
+    if (!otherElement) {
+      return
+    }
+    const resultOtherNumber = otherElement.textContent
+    const otherText = createResult(resultOtherNumber)
+    otherElement.innerHTML = otherText
 
-const showResult = () => {
-  const otherElement = document.getElementById(`game-other-result-text`);
-  const resultOtherNumber = otherElement.textContent
-  const otherText = createResult(resultOtherNumber)
-  otherElement.innerHTML = otherText
-
-  const element = document.getElementById(`game-result-text`);
-  const resultNumber = element.textContent
-  const text = createResult(resultNumber) ? createResult(resultNumber) : otherText
-  element.innerHTML = text
+    const element = document.getElementById(`game-result-text`);
+    const resultNumber = element.textContent
+    const text = createResult(resultNumber) ? createResult(resultNumber) : otherText
+    element.innerHTML = text
+  })
 }
-
-showResult()

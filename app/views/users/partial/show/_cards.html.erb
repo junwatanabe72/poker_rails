@@ -3,7 +3,7 @@
   <p>勝利した役(強い順抜粋)</p>
   <% @results.each_with_index do |cards,num| %>
   <% if num <= 5 %>
-  <%= render "users/partial/show/card",{cards:cards} %>
+  <%= render "users/partial/show/card",{cards:cards,number: num} %>
   <% end %>
 
   <% end %>

@@ -1,4 +1,4 @@
-<h3><%= cards.victory %></h3>
+<h3 id=<%="user-victory#{number+1}" %>><%= cards.victory %></h3>
 <div class="l-flex">
   <% (1..5).each do |num| %>
   <% card = cards["card#{num}".to_sym] %>

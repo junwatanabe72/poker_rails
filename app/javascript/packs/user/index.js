@@ -1,5 +1,5 @@
-const createResult = (number) => {
-  handList = {
+export const createResult = (number) => {
+  const handList = {
     high: "ハイカード",
     one: "ワンペア",
     two: "ツーペア",
@@ -17,14 +17,16 @@ const createResult = (number) => {
 
 }
 
-const showResult = () => {
-  const elements = document.getElementsByTagName(`h3`);
-  for (let i = 0; i < elements.length; i++) {
-    const resultNumber = elements[i].textContent
-    const text = createResult(resultNumber)
-    elements[i].innerHTML = text
-  }
-
-
+export const user = () => {
+  document.addEventListener("turbolinks:load", function () {
+    for (let i = 1; i <= 6; i++) {
+      const element = document.getElementById(`user-victory${i}`);
+      if (!element) {
+        return
+      }
+      const resultNumber = element.textContent
+      const text = createResult(resultNumber)
+      element.innerHTML = text
+    }
+  })
 }
-showResult()
