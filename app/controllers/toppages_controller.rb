@@ -4,7 +4,7 @@ class ToppagesController < ApplicationController
   def index
     if logged_in?
       @result = Result.new()
-      @cards = create_initial_cards
+      @player_cards = Game.start()
     end
   end
 end

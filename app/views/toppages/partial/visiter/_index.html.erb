@@ -1,0 +1,14 @@
+<h2 class="font-size-logo">シンプルなポーカーゲームです。</h2>
+<% texts = ["プレーするには、ユーザー登録が必要です。",
+  "登録済後、ログインしてお楽しみください。"]%>
+<ol>
+  <% texts.each{|text| %>
+  <li class="font-size-list"><%=text %></li>
+  <% } %>
+</ol>
+<div class="TB-micro-padding"></div>
+<div class="l-flex">
+  <%= link_to '登録する！', signup_path,class: 'button button-primary' %>
+  <div class="LR-micro-padding"></div>
+  <%= link_to 'ログイン！', login_path,class: 'button button-secondary' %>
+</div>
