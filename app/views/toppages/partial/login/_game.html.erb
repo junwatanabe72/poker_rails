@@ -1,12 +1,14 @@
 <div class="l-flex">
-  <%= form_with(model: result ,url: results_path , local: true) do |f| %>
+  <% prefix = "game[user_hands][]"%>
+  <%= form_with(url: results_path , local: true) do |f| %>
   <div class="l-flex">
-    <% cards.each_with_index do |card, num| %>
-    <% card_number = exchange_number_to_path(card) %>
+    <% player_cards.each_with_index do |card, num| %>
     <div class="image-box">
-      <%= image_tag card_number, {id: "card-#{num + 1}",class: "image-size",size: "100x150" }%>
+      <%= image_tag "#{card.type}/#{card.id}.png", {id: "card-#{num + 1}",class: "image-size",size: "100x150" }%>
       <div class="hold-text display-none" id=<%="card-#{num + 1}-text-hold"%>>Hold</div>
-      <%= f.check_box "card#{num+1}".to_sym,{class: "display-none",id:"card-#{num + 1}-checkbox"},"#{card}","1#{card}"%>
+      <%= f.hidden_field "#{prefix}is_hold",{class: "display-none",id:"card-#{num + 1}-checkbox",value:card.is_hold} %>
+      <%= f.hidden_field "#{prefix}type" ,value: card.type %>
+      <%= f.hidden_field "#{prefix}id",value: card.id %>
     </div>
     <% end %>
   </div>

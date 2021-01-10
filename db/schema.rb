@@ -10,17 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_29_105736) do
+ActiveRecord::Schema.define(version: 2021_01_10_082653) do
 
   create_table "results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "victory"
-    t.integer "card1"
-    t.integer "card2"
-    t.integer "card3"
-    t.integer "card4"
-    t.integer "card5"
+    t.string "card1"
+    t.string "card2"
+    t.string "card3"
+    t.string "card4"
+    t.string "card5"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "rank"
   end
 
   create_table "user_results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

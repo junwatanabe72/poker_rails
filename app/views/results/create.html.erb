@@ -1,8 +1,7 @@
 <div class="l-center">
-  <%= render 'results/partial/result',{victory: @result.victory} %>
-  <% cards = get_cards_number(@result) %>
-  <%= render 'results/partial/player',{cards: cards,victory: @result.victory} %>
-  <%= render 'results/partial/other',{cards: @opponent_cards,victory: @opponent_result} %>
+  <%= render 'results/partial/result',{victory: @game.victory} %>
+  <%= render 'results/partial/player',{cards: @game.user_hands,rank:@game.user_rank} %>
+  <%= render 'results/partial/other',{cards: @game.cpu_hands,rank:@game.cpu_rank} %>
   <div class="TB-micro-padding">
   </div>
   <div class="l-flex">
