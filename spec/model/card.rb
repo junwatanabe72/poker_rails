@@ -4,7 +4,7 @@ RSpec.describe Card, type: :model do
   describe "cheack Card attr" do
     CARD_NUMBERS = [*1..13]
     CARD_CODES = ["club", "diamond", "heart", "spade"]
-    let(:card) { Card.new() }
+    let(:card) { Card.create_hands() }
 
     context "is_hold" do
       it "returns no error" do
