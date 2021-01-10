@@ -3,8 +3,8 @@ class ToppagesController < ApplicationController
 
   def index
     if logged_in?
-      @result = Result.new()
-      @player_cards = Game.start()
+      @game = Game.new()
+      @player_cards = Game.create_hands()
     end
   end
 end

@@ -3,9 +3,6 @@ class ApplicationController < ActionController::Base
   before_action :require_user_logged_in
 
   include SessionsHelper
-  include CreateCards
-  include ChangeCards
-  include JudgeHands
 
   private
 
