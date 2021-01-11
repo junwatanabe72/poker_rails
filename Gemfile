@@ -48,6 +48,7 @@ group :development do
   gem "spring"
   gem "rspec-rails"
   gem "spring-commands-rspec"
+  gem "rspec-its"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
