@@ -1,69 +1,103 @@
 require "rails_helper"
+require "rspec/its"
+require "json"
 
 RSpec.describe Game, type: :model do
   CARD_NUMBERS = [*1..13]
   CARD_CODES = ["club", "diamond", "heart", "spade"]
-  describe "cheack Game" do
-    describe "create_hands" do
-      let(:game) { Game.create_hands() }
-      context "is_vaild_length" do
-        it "returns no error" do
-          expect(game.length).to eq(5)
-        end
-      end
-      context "is_duplicate?" do
-        it "returns no error" do
-          # [[1,"dimond"],[2,"spade"]]
-          suit_number = { diamond: 100, spade: 200, heart: 300, club: 400 }
-          hands = game.map { |card| suit_number[card.type.to_sym] + card.id }.uniq
-          expect(hands.length).to eq(5)
-        end
-      end
+  let(:hands) { Game.create_hands() }
+
+  describe "#is_duplicate?" do
+    let(:cards) { [Card.new(id: CARD_NUMBERS[0], type: CARD_CODES[0], is_hold: false)] }
+    let(:card) { Card.new(id: CARD_NUMBERS[0], type: CARD_CODES[0], is_hold: false) }
+    subject { Game.duplicate?(cards, card) }
+    context "when duplicate" do
+      it {
+        is_expected.to be_truthy
+      }
     end
-    describe "start" do
-      let(:game) { Game.start(Game.create_hands()) }
-      context "is_vaild_length" do
-        it "returns no error" do
-          expect(game.cpu_rank).to eq(true)
-          expect(game.cpu_hands).to eq(5)
-        end
-      end
+    context "when is cards empty" do
+      let(:cards) { [] }
+      it {
+        is_expected.to be_falsey
+      }
     end
-    # context "range_in_CARD_CODES" do
-    #   it "returns no error" do
-    #     cards_types = game.select { |card| CARD_CODES.include?(card.type) }
-    #     expect(cards_types.length).to eq(5)
-    #   end
-    # end
-    # context "range_in_CARD_NUMBERS" do
-    #   it "returns no error" do
-    #     cards_ids = game.select { |card| CARD_NUMBERS.include?(card.id) }
-    #     expect(cards_ids.length).to eq(5)
-    #   end
-    # end
-    # context "all_cards_has_false_of_is_hold" do
-    #   it "returns no error" do
-    #     cards_is_holds = game.select { |card| card.is_hold == false }
-    #     expect(cards_is_holds.length).to eq(5)
-    #   end
-    # end
-    # describe "change_card_of_ishold_attr_with_false" do
-    #   let(:game) { Game.new(user_hands: Game.create_hands) }
-    #   context "is_vaild_length" do
-    #     it "returns no error" do
-    #       expect(game.change_card_of_ishold_attr_with_false.length).to eq(5)
-    #     end
-    #   end
-    # end
-    # context "id" do
-    #   it "returns no error" do
-    #     expect(CARD_NUMBERS).to include(card.id)
-    #   end
-    # end
-    # context "type" do
-    #   it "returns no error" do
-    #     expect(CARD_CODES).to include(card.type)
-    #   end
-    # end
+    context "when not duplicate" do
+      let(:card) { Card.new(id: CARD_NUMBERS[1], type: CARD_CODES[0], is_hold: false) }
+      it {
+        is_expected.to be_falsey
+      }
+    end
+  end
+  describe "#create_hands" do
+    let(:cards) { (1..5).map { |num| Card.new(id: num, type: CARD_CODES[rand(CARD_CODES.length)], is_hold: true) } }
+    subject { Game.create_hands(cards) }
+    context "when not arg" do
+      let(:cards) { [] }
+      its(:size) { is_expected.to eq 5 }
+    end
+    context "when arg" do
+      its(:size) { is_expected.to eq 5 }
+    end
+  end
+  describe "#judge" do
+    let(:game) { Game.new(user_hands: params) }
+    let(:params) { array.map { |num| Card.new(id: num, type: CARD_CODES[0], is_hold: true) } }
+    subject { game.judge }
+    context "when win on" do
+      let(:array) { [1, 10, 11, 12, 13] }
+      it {
+        is_expected.to have_attributes(victory: 2)
+        is_expected.to have_attributes(user_rank: 9)
+      }
+    end
+    context "when lose on" do
+      let(:params) { array.map { |num| Card.new(id: num, type: CARD_CODES[rand(CARD_CODES.length)], is_hold: true) } }
+      let(:array) { [5, 2, 3, 4, 7] }
+      it {
+        is_expected.to have_attributes(victory: 1)
+        is_expected.to have_attributes(user_rank: 0)
+      }
+    end
+  end
+  describe "#change_params_to_instance" do
+    let(:params) {
+      { "user_hands" => [{ is_hold: "false", type: "spade", id: "8" },
+                        { is_hold: "false", type: "spade", id: "8" },
+                        { is_hold: "false", type: "spade", id: "8" },
+                        { is_hold: "false", type: "spade", id: "8" },
+                        { is_hold: "false", type: "spade", id: "8" }] }
+    }
+    subject { Game.change_params_to_instance(params) }
+    its(:size) { is_expected.to eq 5 }
+  end
+  describe "#start" do
+    let(:params) {
+      { "user_hands" => [{ is_hold: "true", type: "spade", id: "10" },
+                        { is_hold: "true", type: "spade", id: "12" },
+                        { is_hold: "true", type: "spade", id: "1" },
+                        { is_hold: "true", type: "spade", id: "13" },
+                        { is_hold: "true", type: "spade", id: "11" }] }
+    }
+    subject { Game.start(params) }
+    context "when win on" do
+      it {
+        is_expected.to have_attributes(victory: 2)
+        is_expected.to have_attributes(user_rank: 9)
+      }
+    end
+    context "when lose on" do
+      let(:params) {
+        { "user_hands" => [{ is_hold: "true", type: "diamond", id: "3" },
+                          { is_hold: "true", type: "spade", id: "4" },
+                          { is_hold: "true", type: "spade", id: "5" },
+                          { is_hold: "true", type: "spade", id: "8" },
+                          { is_hold: "true", type: "spade", id: "2" }] }
+      }
+      it {
+        is_expected.to have_attributes(victory: 1)
+        is_expected.to have_attributes(user_rank: 0)
+      }
+    end
   end
 end
