@@ -9,8 +9,20 @@ class Game
   LOSE = 1
   DROW = 0
 
+  def self.duplicate?(cards, created_card)
+    if cards.empty?
+      return false
+    end
+    checked_cards = cards.select { |card|
+      card.id.to_i == created_card.id.to_i &&
+      card.type.to_sym == created_card.type.to_sym
+    }
+    return checked_cards.length > 0
+  end
+
   def self.create_hands(dealed_cards = [])
     cards = []
+
     DRAW_TIMES.times {
       card = Card.new(id: CARD_NUMBERS[rand(CARD_NUMBERS.length)], type: CARD_CODES[rand(CARD_CODES.length)], is_hold: false)
       while duplicate?(dealed_cards, card)
@@ -22,7 +34,38 @@ class Game
     return cards
   end
 
-  def change_cards_of_not_is_hold
+  def self.change_params_to_instance(game_params)
+    cards = []
+    cards = game_params.to_h["user_hands"].map { |card|
+      Card.new(id: card[:id], type: card[:type], is_hold: card[:is_hold])
+    }
+  end
+
+  def judge
+    self.dealed_cards = create_dealed_cards
+    self.user_hands = change_cards_of_not_hold_and_add_dealed_cards
+    self.cpu_hands = Game.create_hands(self.dealed_cards)
+    judged_data_of_player = Judge.start(self.user_hands)
+    judged_data_of_cpu = Judge.start(self.cpu_hands)
+    self.user_rank = judged_data_of_player.rank
+    self.cpu_rank = judged_data_of_cpu.rank
+    self.victory = victory?(judged_data_of_player, judged_data_of_cpu)
+    self
+  end
+
+  def self.start(game_params)
+    changed_params = change_params_to_instance(game_params)
+    @game = Game.new(user_hands: changed_params)
+    @game = @game.judge
+  end
+
+  private
+
+  def create_dealed_cards
+    self.user_hands.map { |card| card }
+  end
+
+  def change_cards_of_not_hold_and_add_dealed_cards
     return_cards = self.user_hands.map { |card|
       if !ActiveRecord::Type::Boolean.new.cast(card.is_hold)
         created_card = Card.new(id: CARD_NUMBERS[rand(CARD_NUMBERS.length)], type: CARD_CODES[rand(CARD_CODES.length)], is_hold: false)
@@ -39,9 +82,9 @@ class Game
 
   def victory?(player, cpu)
     if player.rank == cpu.rank
-      player_card_number = player.sub == 1 ? 14 : player.sub
-      cpu_card_number = cpu.sub == 1 ? 14 : cpu.sub
-      if player_card_number > cpu_card_number
+      # player_card_number = player.sub == 1 ? 14 : player.sub
+      # cpu_card_number = cpu.sub == 1 ? 14 : cpu.sub
+      if player.sub > cpu.sub
         return WIN
       else
         return LOSE
@@ -52,39 +95,5 @@ class Game
       return WIN
     end
     return LOSE
-  end
-
-  def self.start(game_params)
-    changed_params = change_data_to_instance_from_json(game_params)
-    @game = Game.new(user_hands: changed_params)
-    @game.dealed_cards = @game.user_hands.map { |card| card }
-    @game.user_hands = @game.change_cards_of_not_is_hold
-    @game.cpu_hands = Game.create_hands(@game.dealed_cards)
-    judged_data_of_player = Judge.start(@game.user_hands)
-    judged_data_of_cpu = Judge.start(@game.cpu_hands)
-    @game.user_rank = judged_data_of_player.rank
-    @game.cpu_rank = judged_data_of_cpu.rank
-    @game.victory = @game.victory?(judged_data_of_player, judged_data_of_cpu)
-    @game
-  end
-
-  private
-
-  def self.duplicate?(cards, created_card)
-    if cards.empty?
-      return false
-    end
-    checked_cards = cards.select { |card|
-      card.id.to_i == created_card.id.to_i &&
-      card.type.to_sym == created_card.type.to_sym
-    }
-    return checked_cards.length > 0
-  end
-
-  def self.change_data_to_instance_from_json(game_params)
-    cards = []
-    cards = game_params.to_h["user_hands"].map { |card|
-      Card.new(id: card[:id], type: card[:type], is_hold: card[:is_hold])
-    }
   end
 end
