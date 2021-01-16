@@ -18,13 +18,13 @@ working_directory rails_root
 
 # 接続タイムアウト時間
 timeout 30
-listen 3000
+listen 3001
 # Unicornのエラーログと通常ログの位置を指定。
 stderr_path File.expand_path("../../log/unicorn_stderr.log", __FILE__)
 stdout_path File.expand_path("../../log/unicorn_stdout.log", __FILE__)
 
 if ENV["RAILS_ENV"] == "development"
-  listen 3000
+  listen 3001
   before_fork do |server, worker|
     defined?(ActiveRecord::Base) and
       ActiveRecord::Base.connection.disconnect!

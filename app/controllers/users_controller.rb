@@ -20,10 +20,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:notice] = 'ユーザを登録しました。'
+      flash[:notice] = "User registration has been successfully completed."
       redirect_to @user
     else
-      flash.now[:alert] = 'ユーザの登録に失敗しました。'
+      flash.now[:alert] = "fail to User registration"
       render :new
     end
   end

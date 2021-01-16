@@ -4,7 +4,7 @@
   <div class="l-flex">
     <% player_cards.each_with_index do |card, num| %>
     <div class="image-box">
-      <%= image_tag "#{card.type}/#{card.id}.png", {id: "card-#{num + 1}",class: "image-size",size: "100x150" }%>
+      <%= image_tag "#{card.type}/#{card.id}.png", {id: "card-#{num + 1}",class: "image-size toppage-cards",size: "100x150" }%>
       <div class="hold-text display-none" id=<%="card-#{num + 1}-text-hold"%>>Hold</div>
       <%= f.hidden_field "#{prefix}is_hold",{class: "display-none",id:"card-#{num + 1}-checkbox",value:card.is_hold} %>
       <%= f.hidden_field "#{prefix}type" ,value: card.type %>
@@ -13,7 +13,7 @@
     <% end %>
   </div>
   <div class="l-text-center">
-    <%= f.submit '勝負する！', class: 'button button-secondary' %>
+    <%= f.submit 'play', class: 'button button-secondary',id: "play-poker" %>
   </div>
   <% end %>
 </div>

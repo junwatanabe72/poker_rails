@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_action :require_user_logged_in
-  
+
   def new
   end
 
@@ -8,17 +8,17 @@ class SessionsController < ApplicationController
     email = params[:session][:email].downcase
     password = params[:session][:password]
     if login(email, password)
-      flash[:notice] = 'ログインに成功しました。'
+      flash[:notice] = "success to login"
       redirect_to @user
     else
-      flash.now[:alert] = 'ログインに失敗しました。'
+      flash.now[:alert] = "fail to login"
       render :new
     end
   end
 
   def destroy
     session[:user_id] = nil
-    flash[:notice] = 'ログアウトしました。'
+    flash[:notice] = "success to logout"
     redirect_to root_url
   end
 

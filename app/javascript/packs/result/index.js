@@ -1,15 +1,15 @@
 const createResult = (number) => {
   const handList = {
-    high: "ハイカード",
-    one: "ワンペア",
-    two: "ツーペア",
-    three: "スリーカード",
-    straight: "ストレート",
-    flush: "フラッシュ",
-    full: "フルハウス",
-    four: "フォカード",
-    sflush: "ストレートフラッシュ",
-    royal: "ロイヤルストレートフラッシュ"
+    high: "hight card",
+    one: "one pair",
+    two: "two pair",
+    three: "three card",
+    straight: "straight",
+    flush: "flush",
+    full: "full house",
+    four: "four card",
+    sflush: "straight flush",
+    royal: "royal straight flush"
   }
   const handNames = Object.values(handList)
   const result = handNames[number]

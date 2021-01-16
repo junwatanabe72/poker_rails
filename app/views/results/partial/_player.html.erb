@@ -1,10 +1,10 @@
 <div class="l-flex">
-  <h3>あなたのカード</h3>
+  <h3>players hands</h3>
   <div class="LR-micro-padding"></div>
   <h3 id="game-result-text"><%= rank %></h3>
 </div>
 <div class="l-flex">
   <% cards.each do |card| %>
-  <%= image_tag "#{card.type}/#{card.id}.png", {class: "image-size",size: "100x150" }%>
+  <%= image_tag "#{card.type}/#{card.id}.png", {class: "image-size result-cards",size: "100x150" }%>
   <% end %>
 </div>

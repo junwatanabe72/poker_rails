@@ -2,18 +2,18 @@
   <h1>Login</h1>
   <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
   <div class="form-group">
-    <div class="user-edit-p1">メールアドレス</div>
-    <%= f.email_field :email, class: 'form' %>
+    <div class="user-edit-p1">email</div>
+    <%= f.email_field :email, class: 'form', id: 'session_email' %>
   </div>
 
   <div class="form-group">
-    <div class="user-edit-p1">パスワード</div>
-    <%= f.password_field :password, class: 'form' %>
+    <div class="user-edit-p1">password</div>
+    <%= f.password_field :password, class: 'form', id: 'session_password' %>
   </div>
 
   <div class="TB-middle-padding"></div>
   <div class="l-text-center">
-    <%= f.submit 'ログイン！', class: 'button button-secondary' %>
+    <%= f.submit 'login', class: 'button button-secondary', id: 'session_button' %>
   </div>
   <% end %>
 </div>
