@@ -1,0 +1,13 @@
+<h1 class="font-size-logo">Start</h1>
+<% texts = ["You play against the cpu by the strength of your hand.",
+  "Click on the card to hold it",
+  "You can only exchange your card once.",
+  "Press the Play button",
+  "If the hands are the same, the cpu wins"]%>
+<ol>
+  <% texts.each{|text| %>
+  <li class="font-size-list"><%=text %></li>
+  <% } %>
+</ol>
+<div class="TB-micro-padding"></div>
+<%= render 'toppages/partial/login/game',{result:@result,player_cards:@player_cards} %>

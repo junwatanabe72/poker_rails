@@ -1,12 +1,16 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show]
-  
+  skip_before_action :require_user_logged_in, only: [:new, :create]
+
   def index
     @users = User.order(id: :desc).page(params[:page]).per(25)
   end
 
   def show
     @user = User.find(params[:id])
+    all_results = @user.results.all
+    victory_results = @user.results.where(victory: 2)
+    @results = victory_results.order(rank: :desc).to_a
+    @average = @results.length == 0 ? @results.length : (@results.length.to_f / all_results.length) * 100
   end
 
   def new
@@ -16,10 +20,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = 'ユーザを登録しました。'
+      flash[:notice] = "User registration has been successfully completed."
       redirect_to @user
     else
-      flash.now[:danger] = 'ユーザの登録に失敗しました。'
+      flash.now[:alert] = "fail to User registration"
       render :new
     end
   end
@@ -27,6 +31,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :icon,:email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :icon, :email, :password, :password_confirmation)
   end
 end

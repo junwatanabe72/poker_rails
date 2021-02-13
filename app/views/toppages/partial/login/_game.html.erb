@@ -1,3 +1,19 @@
-<%= render "toppages/partial/login/card" %>
-<div class="TB-micro-padding"></div>
-<%= render "toppages/partial/login/button" %>
+<div class="l-flex">
+  <% prefix = "game[user_hands][]"%>
+  <%= form_with(url: results_path , local: true) do |f| %>
+  <div class="l-flex">
+    <% player_cards.each_with_index do |card, num| %>
+    <div class="image-box">
+      <%= image_tag "#{card.type}/#{card.id}.png", {id: "card-#{num + 1}",class: "image-size toppage-cards",size: "100x150" }%>
+      <div class="hold-text display-none" id=<%="card-#{num + 1}-text-hold"%>>Hold</div>
+      <%= f.hidden_field "#{prefix}is_hold",{class: "display-none",id:"card-#{num + 1}-checkbox",value:card.is_hold} %>
+      <%= f.hidden_field "#{prefix}type" ,value: card.type %>
+      <%= f.hidden_field "#{prefix}id",value: card.id %>
+    </div>
+    <% end %>
+  </div>
+  <div class="l-text-center">
+    <%= f.submit 'play', class: 'button button-secondary',id: "play-poker" %>
+  </div>
+  <% end %>
+</div>

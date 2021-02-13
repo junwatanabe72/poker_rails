@@ -1,0 +1,13 @@
+<% if @results.any? %>
+<div class="l-card">
+  <p>victory hands(in order of strength)</p>
+  <% @results.each_with_index do |cards,num| %>
+  <% if num < 5 %>
+  <%= render "users/partial/show/card",{cards:cards,number: num} %>
+  <% end %>
+
+  <% end %>
+</div>
+<%else%>
+<div></div>
+<% end %>

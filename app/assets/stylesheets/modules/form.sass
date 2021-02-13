@@ -1,0 +1,39 @@
+@import 'variables';
+
+.image-box 
+  /* これを追加します。 */
+  position: relative;
+  /* これを追加します。 */
+
+.display-none
+  display: none;
+
+.hold-text
+  /* チェックボックスの位置は絶対位置にします。 */
+  position: absolute;
+  color: $white;
+  font-size: 30px;
+  /* チェックボックスは、親要素の右上から12pxの位置に配置します。 */
+  top: 55px
+  right: 20px
+  @include sp()
+    position: absolute;
+    top: 40px
+    right: 10px
+    font-size: 15px
+		
+
+.checked 
+  filter: brightness(50%);
+  -webkit-filter: brightness(50%);
+
+.form
+  width: 100vw;
+  max-width: 300px;
+  font-size: 15px;
+  padding: 1vw 0vw 1vw 1vw;
+  border-radius: 6px;
+  border-width: 1px;
+  border: 1px solid #ccc;
+  @include sp()
+    

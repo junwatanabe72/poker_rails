@@ -1,7 +1,10 @@
 class ToppagesController < ApplicationController
-  include GamesHelper
+  skip_before_action :require_user_logged_in
 
   def index
-    @cards = create_initial_cards
+    if logged_in?
+      @game = Game.new()
+      @player_cards = Game.create_hands()
+    end
   end
 end

@@ -1,0 +1,12 @@
+<div class="l-card">
+  <p><%= title %></p>
+  <div class="l-card-position">
+    <%= image_tag "user/#{user.icon}.png", {class: "image-size",size: "100x150" } %>
+    <div>
+      <h2>name: <%= user.name %></h2>
+      <% if average %>
+      <h2>rate: <%= average.round(0) %> %</h2>
+      <% end %>
+    </div>
+  </div>
+</div>

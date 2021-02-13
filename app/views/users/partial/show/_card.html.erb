@@ -1,0 +1,7 @@
+<h3 id=<%="user-victory#{number+1}" %>><%= cards.rank %></h3>
+<div class="l-flex">
+  <% (1..5).each do |num| %>
+  <% card = cards["card#{num}".to_sym] %>
+  <%= image_tag card, { class: "image-size", size: "100x150" } %>
+  <% end %>
+</div>

@@ -1,6 +1,0 @@
-<% cards = create_initial_cards %>
-<div class="l-flex">
-  <% cards.each_with_index do |card,num| %>
-  <%= image_tag card,class: "card-#{num+1}",size: '100x150',onmouseover: "this.src='#{asset_path('back.png')}'",onmouseout: "this.src='#{asset_path(card)}'"%>
-  <% end %>
-</div>

@@ -1,31 +1,47 @@
-<div class="text-center">
+<div class="l-center">
   <h1>Sign up</h1>
-</div>
-
-<div class="row">
-  <div class="col-sm-6 offset-sm-3">
-
-    <%= form_with(model: @user, local: true) do |f| %>
-    <%# <%= render 'layouts/error_messages', model: f.object %> %>
-    <div class="form-group">
-      <%= f.label :name, 'Name' %>
-      <%= f.text_field :name, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :email, 'Email' %>
-      <%= f.email_field :email, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :password, 'Password' %>
-      <%= f.password_field :password, class: 'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :password_confirmation, 'Confirmation' %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-    </div>
-
-    <%= f.submit 'Sign up', class: 'btn btn-primary btn-block' %>
-    <% end %>
+  <%= form_with(model: @user, local: true) do |f| %>
+  <% if @user.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
   </div>
+  <% end %>
+  <div class="form-group">
+    <div class="user-edit-p1">name</div>
+    <%= f.text_field :name,placeholder: "under 50char", class: 'form' %>
+  </div>
+  <div class="form-group">
+    <div class="user-edit-p1">email</div>
+    <%= f.email_field :email, class: 'form' %>
+  </div>
+  <div class="form-group">
+    <div class="user-edit-p1">players icon</div>
+    <div class="l-text-between">
+      <% (1..5).each do |number| %>
+      <div>
+        <%= image_tag "user/#{number}.png", {id: "card-#{number}",size: "50x75" }%>
+        <label class="l-block">
+          <%= f.radio_button :icon,number,{class: "",id:"card-#{number}-radio"} %>
+        </label>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="user-edit-p1">password</div>
+    <%= f.password_field :password,placeholder: "over 6char", class: 'form' %>
+  </div>
+  <div class="form-group">
+    <div class="user-edit-p1">confirmation password</div>
+    <%= f.password_field :password_confirmation,placeholder: "over 6char", class: 'form' %>
+  </div>
+  <div class="TB-middle-padding"></div>
+  <div class="l-text-center">
+    <%= f.submit 'signup', class: 'button button-primary' %>
+  </div>
+  <% end %>
 </div>
